@@ -32,9 +32,9 @@ Image of the cast from first season:
 
 # Summary of viewership and rating
 
-Below presented summary of viewership and ratings of each season. The table generation was fasten up by Chat GPT. 
+Below presented summary of viewership and ratings of each season. The table generation was fasten up by Chat GPT and the colors to second graph were added with help of chat. 
 
-```{r libraries}
+```{r libraries, include=FALSE}
 library(dplyr)
 library(tibble)
 library(ggplot2)
@@ -72,9 +72,8 @@ ggplot(friends_stats, aes(x = season, y = viewers_millions)) +
 ### Graph of the season-to-season changes in viewership
 
 ```{r, changes plot}
-friends_changes <- friends_stats %>%
-  mutate(change = viewers_millions - lag(viewers_millions)) %>%
-  filter(!is.na(change))
+
+friends_changes <- friends_stats %>% mutate(change = viewers_millions - lag(viewers_millions)) %>% filter(!is.na(change))
 
 ggplot(friends_changes, aes(x = season, y = change, fill = change > 0)) +
   geom_col() +
@@ -87,3 +86,15 @@ ggplot(friends_changes, aes(x = season, y = change, fill = change > 0)) +
   ) +
   theme_minimal()
 ```
+
+The largest increase in viewership occurred between seasons 1 and 2 it was close to: **`r round(friends_changes$change[1], 1)`** million viewers. Another visible peak is observed between season 7 and 8, it was equal to: **`r round(friends_changes$change[7], 1)`** million viewers. Beside peaks the show mostly experienced declines, with the biggest drop between second and third season.
+
+However this views taking into consideration only viewers in front of the TV while the episodes were aired, the actual streaming numbers via HBO or Netflix are much higher. 
+
+----
+
+Sources: 
+
+- Wikipedia 
+- ChatGPT was used to debbuging and elevating output
+- https://stackoverflow.com/questions/10902504/r-markdown-accessing-variable-from-code-chunk-variable-scope - to learn how to insert variable into text
