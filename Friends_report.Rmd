@@ -1,0 +1,23 @@
+---
+title: "Friends TV Series Report"
+subtitle: "Reproducible Reaserch Assigment 9"
+author: "Aleksandra Engel"
+date: "`r format(Sys.Date(), '%d.%m.%Y')`"
+output:
+  html_document:
+    theme: flatly
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    number_sections: true
+    highlight: tango
+    df_print: paged
+    code_folding: hide
+fontsize: 11pt
+geometry: margin=2.5cm
+---
+
+# About the show 
+
+Friends is an American television sitcom created by *David Crane* and *Marta Kauffman*, which aired on NBC from September 22, 1994, to May 6, 2004, lasting ten seasons. With an ensemble cast starring *Jennifer Aniston*, *Courteney Cox*, *Lisa Kudrow*, *Matt LeBlanc*, *Matthew Perry*, and *David Schwimmer*, the show revolves around six friends in their 20s and early 30s who live in Manhattan, New York City.
+
