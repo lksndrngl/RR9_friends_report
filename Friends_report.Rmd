@@ -34,9 +34,14 @@ Image of the cast from first season:
 
 Below presented summary of viewership and ratings of each season. The table generation was fasten up by Chat GPT. 
 
-```{r stats}
-
+```{r libraries}
+library(dplyr)
 library(tibble)
+library(ggplot2)
+
+```
+
+```{r stats}
 
 friends_stats <- tibble(
   season = 1:10,
@@ -48,3 +53,37 @@ friends_stats
 
 ```
 
+### Graph of the viewership over time 
+
+```{r viewers over time}
+
+ggplot(friends_stats, aes(x = season, y = viewers_millions)) +
+  geom_line(linewidth = 1, color="#440154") +
+  geom_point(size = 2, color="#440154") +
+  labs(
+    title = "Viewership of Friends Over Time",
+    x = "Season",
+    y = "Viewers (millions)"
+  ) +
+  theme_minimal()
+
+```
+
+### Graph of the season-to-season changes in viewership
+
+```{r, changes plot}
+friends_changes <- friends_stats %>%
+  mutate(change = viewers_millions - lag(viewers_millions)) %>%
+  filter(!is.na(change))
+
+ggplot(friends_changes, aes(x = season, y = change, fill = change > 0)) +
+  geom_col() +
+  scale_fill_manual(values = c("TRUE" = "lightgreen", "FALSE" = "#d7191c")) +
+  labs(
+    title = "Season-to-Season Changes in Viewership",
+    x = "Season",
+    y = "Change in viewers (millions)",
+    fill = "Increase"
+  ) +
+  theme_minimal()
+```
